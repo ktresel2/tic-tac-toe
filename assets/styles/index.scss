@@ -3,6 +3,7 @@
 * {
   box-sizing: border-box;
 }
+
 .hide {
   display: none;
 }
@@ -16,18 +17,22 @@ h1, h2 {
   width: 100%;
   margin: auto;
   padding: 0;
+
+  & section form {
+    background-color: lightblue;
+    border-radius: 30px;
+    height: 60vh;
+    margin: auto;
+  }
 }
 
-form {
-  background-color: lightblue;
-  border-radius: 30px;
-  height: 60vh;
-  margin: auto;
-}
+
 
 .game {
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   margin: auto;
 }
 
@@ -37,14 +42,34 @@ form {
 }
 
 .box {
-  background-color: #000900;
+  background-color: #ff66f6;
   border: 1px solid white;
   height: 33%;
   padding: 0;
+  cursor: pointer;
+
+  &.x {
+    background-color: red;
+
+  }
+
+  &.o {
+    background-color: green;
+  }
+}
+
+#controls {
+  display: flex;
+  justify-content: space-around;
+
+  button {
+    padding: 1.5rem 2rem;
+  }
 }
 
 @media (max-width: 600px) {
-  h1, h2 {
+  h1,
+  h2 {
     font-size: 0.7rem;
   }
   .gameboard {

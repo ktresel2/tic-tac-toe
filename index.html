@@ -12,44 +12,73 @@
       <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
     </head>
     <body>
-      <header class="mt-5">
+      <header class="mt-3">
         <h1>Welcome</h1>
         <h2>Please start by signing in or creating a new account</h2>
       </header>
       <main class="container justify-between m-auto">
-        <section class="row unAuth hide">
-          <form class="sign-in col-md-5 p-3 mt-3">
+        <section id="unAuth" class="row">
+          <form id="sign-in" class="col-md-5 p-4 mt-3">
             <h3>Sign in</h3>
             <label for="userEmail"></label>
             <input class="form-control" type="email" name="credentials[email]" id="userEmail" placeholder="Enter your email">
             <label for="userPassword"></label>
             <input class="form-control" type="password" name="credentials[password]" id="userPassword" placeholder="Enter password">
-            <button class="btn btn-warning mt-3" id="signIn" type="submit">Login</button>
+            <button class="btn btn-warning mt-3" type="submit">Login</button>
           </form>
-          <form class="sign-up col-md-5 p-3 mt-3">
+          <form id="sign-up" class="col-md-5 p-4 mt-3">
             <h3>Sign up</h3>
             <label for="userId"></label>
             <input class="form-control" type="text" name="credentials[email]" id="userId" placeholder="Create user ID">
             <label for="userPassword"></label>
-            <input class="form-control" type="password" name="credentials[password]" id="userPassword" placeholder="Create password">
+            <input class="form-control" type="password" name="credentials[password]" id="newUserPassword" placeholder="Create password">
             <label for="userPasswordConfirm"></label>
-            <input class="form-control" type="password" name="credentials[password_confirmation]" id="userPasswordConfirm" placeholder="Confirm password">
-            <button class="btn btn-warning mt-3" id="signIn" type="submit">Create Account</button>
+            <input class="form-control" type="password" name="credentials[password_confirmation]" id="newUserPasswordConfirm" placeholder="Confirm password">
+            <button class="btn btn-warning mt-3" type="submit">Create Account</button>
           </form>
         </section>
         <section class="game mt-5">
-          <div class="gameboard row">
+          <div class="gameboard row hide">
             <div class="box col-4"></div>
             <div class="box col-4"></div>
             <div class="box col-4"></div>
             <div class="box col-4"></div>
-            <div class="box col-4"></div>
-            <div class="box col-4"></div>
+            <div class="x box col-4"></div>
+            <div class="o box col-4"></div>
             <div class="box col-4"></div>
             <div class="box col-4"></div>
             <div class="box col-4"></div>
           </div>
+          <section id="controls" class="p-3 mt-5">
+            <button id="sign-out" class="ctrl-btn btn btn-outline-danger mx-3">Sign Out</button>
+            <button data-toggle="modal" data-target="#change-password-modal" id="change-password" class="ctrl-btn btn btn-warning mx-3">Change Password</button>
+          </section>
         </section>
+        <div class="modal fade" id="change-password-modal" tabindex="-1" role="dialog">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form id="change-password-form">
+                  <label for="oldPW"></label>
+                  <input class="form-control" type="password" name="passwords[old]" id="oldPW" placeholder="Current password">
+                  <label for="newPW"></label>
+                  <input class="form-control" type="password" name="passwords[new]" id="newPW" placeholder="New password">
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                  </div>
+                </form>
+              </div>
+
+            </div>
+          </div>
+        </div>
       </main>
     </body>
 </html>
