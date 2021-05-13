@@ -12,6 +12,42 @@
       <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
     </head>
     <body>
-      <h1>Browser Template</h1>
+      <header class="mt-5">
+        <h1>Welcome</h1>
+        <h2>Please start by signing in or creating a new account</h2>
+      </header>
+      <main class="container justify-between m-auto">
+        <section class="row unAuth hide">
+          <form class="sign-in col-md-5 p-3 mt-3">
+            <h3>Sign in</h3>
+            <label for="userId"></label>
+            <input class="form-control" type="text" name="user[id]" id="userId" placeholder="Enter user ID">
+            <label for="userPassword"></label>
+            <input class="form-control" type="password" name="user[password]" id="userPassword" placeholder="Enter password">
+            <button class="btn btn-warning mt-3" id="signIn" type="submit">Login</button>
+          </form>
+          <form class="sign-up col-md-5 p-3 mt-3">
+            <h3>Sign up</h3>
+            <label for="userId"></label>
+            <input class="form-control" type="text" name="user[id]" id="userId" placeholder="Create user ID">
+            <label for="userPassword"></label>
+            <input class="form-control" type="password" name="user[password]" id="userPassword" placeholder="Create password">
+            <button class="btn btn-warning mt-3" id="signIn" type="submit">Create Account</button>
+          </form>
+        </section>
+        <section class="game mt-5">
+          <div class="gameboard row">
+            <div class="box col-4"></div>
+            <div class="box col-4"></div>
+            <div class="box col-4"></div>
+            <div class="box col-4"></div>
+            <div class="box col-4"></div>
+            <div class="box col-4"></div>
+            <div class="box col-4"></div>
+            <div class="box col-4"></div>
+            <div class="box col-4"></div>
+          </div>
+        </section>
+      </main>
     </body>
 </html>
