@@ -26,6 +26,10 @@ h1, h2 {
   }
 }
 
+#start-game {
+  display: flex;
+  margin: auto;
+}
 
 
 .game {
@@ -70,9 +74,14 @@ h1, h2 {
 @media (max-width: 600px) {
   h1,
   h2 {
-    font-size: 0.7rem;
+    font-size: .9rem;
   }
-  .gameboard {
+
+  form {
+    max-width: 70vw
+  }
+
+  #gameboard {
     height: 400px;
     width: 400px;
   }

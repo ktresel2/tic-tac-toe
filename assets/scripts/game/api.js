@@ -23,7 +23,7 @@ const showGame = function (gameId) {
   })
 }
 
-const createGame = function (data) {
+const createGame = function () {
   return $.ajax({
     method: 'POST',
     data: '{}',
@@ -34,19 +34,11 @@ const createGame = function (data) {
   })
 }
 // LOST HERE!!
-const updateGame = function (index, value, over, gameId) {
+const updateGame = function (data) {
   return $.ajax({
     method: 'PATCH',
-    data: {
-      game: {
-        cell: {
-          index: index,
-          value: value
-        },
-        over: over
-      }
-    },
-    url: config.apiUrl + '/games/' + gameId,
+    data,
+    url: config.apiUrl + '/games/' + store.game._id,
     headers: {
       Authorization: `Bearer ${store.user.token}`
     }

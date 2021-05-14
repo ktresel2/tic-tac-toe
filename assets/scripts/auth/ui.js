@@ -17,17 +17,18 @@ const signUpFailure = function () {
 const signInSuccess = function (res) {
   $('#sign-in').trigger('reset')
   $('h1').text('Welcome')
-  $('h2').text('Signed in successfully')
+  $('h2').text('Signed in. Click below to get started')
   $('#unAuth').addClass('hide')
-  $('#gameboard').removeClass('hide')
   $('#change-password').removeClass('hide')
   $('#sign-out').removeClass('hide')
+  $('#start-btn-area').removeClass('hide')
 
   console.log(res)
   store.user = res.user
 }
 
 const signInFailure = function () {
+  $('h1').text('Unsuccessful')
   $('h2').text('Username or password incorrect')
 }
 

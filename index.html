@@ -12,12 +12,12 @@
       <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
     </head>
     <body>
-      <header class="mt-3 hide">
+      <header class="mt-3">
         <h1>Welcome</h1>
         <h2>Please start by signing in or creating a new account</h2>
       </header>
       <main class="container justify-between m-auto">
-        <section id="unAuth" class="row hide">
+        <section id="unAuth" class="row">
           <form id="sign-in" class="col-md-5 p-4 mt-3">
             <h3>Sign in</h3>
             <label for="userEmail"></label>
@@ -37,8 +37,11 @@
             <button class="btn btn-warning mt-3" type="submit">Create Account</button>
           </form>
         </section>
+        <div id="start-btn-area" class="hide">
+          <button id="start-game" class="btn btn-success p-5 mt-5">Start game</button>
+        </div>
         <section class="game mt-5">
-          <div id="gameboard" class="row">
+          <div id="gameboard" class="row hide">
             <div class="data-cell-index='0' box col-4"></div>
             <div class="data-cell-index='1' box col-4"></div>
             <div class="data-cell-index='2' box col-4"></div>
