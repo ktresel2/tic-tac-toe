@@ -12,12 +12,12 @@
       <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
     </head>
     <body>
-      <header class="mt-3">
+      <header class="mt-3 hide">
         <h1>Welcome</h1>
         <h2>Please start by signing in or creating a new account</h2>
       </header>
       <main class="container justify-between m-auto">
-        <section id="unAuth" class="row">
+        <section id="unAuth" class="row hide">
           <form id="sign-in" class="col-md-5 p-4 mt-3">
             <h3>Sign in</h3>
             <label for="userEmail"></label>
@@ -38,27 +38,28 @@
           </form>
         </section>
         <section class="game mt-5">
-          <div class="gameboard row hide">
-            <div class="box col-4"></div>
-            <div class="box col-4"></div>
-            <div class="box col-4"></div>
-            <div class="box col-4"></div>
-            <div class="x box col-4"></div>
-            <div class="o box col-4"></div>
-            <div class="box col-4"></div>
-            <div class="box col-4"></div>
-            <div class="box col-4"></div>
+          <div id="gameboard" class="row">
+            <div class="data-cell-index='0' box col-4"></div>
+            <div class="data-cell-index='1' box col-4"></div>
+            <div class="data-cell-index='2' box col-4"></div>
+            <div class="data-cell-index='3' box col-4"></div>
+            <div class="data-cell-index='4' box col-4"></div>
+            <div class="data-cell-index='5' box col-4"></div>
+            <div class="data-cell-index='6' box col-4"></div>
+            <div class="data-cell-index='7' box col-4"></div>
+            <div class="data-cell-index='8' box col-4"></div>
           </div>
           <section id="controls" class="p-3 mt-5">
-            <button id="sign-out" class="ctrl-btn btn btn-outline-danger mx-3">Sign Out</button>
-            <button data-toggle="modal" data-target="#change-password-modal" id="change-password" class="ctrl-btn btn btn-warning mx-3">Change Password</button>
+            <button id="sign-out" class="ctrl-btn btn btn-outline-danger mx-3 hide">Sign Out</button>
+            <button data-toggle="modal" data-target="#change-password-modal" id="change-password" class="ctrl-btn btn btn-warning mx-3 hide">Change Password</button>
           </section>
+          <button class="btn btn-success px-5 py-3 hide" id="sign-back-in">Return to sign-in</button>
         </section>
         <div class="modal fade" id="change-password-modal" tabindex="-1" role="dialog">
           <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle">Change password</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>

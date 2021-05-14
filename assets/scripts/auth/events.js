@@ -33,9 +33,14 @@ const onSignOut = function (e) {
   api.signOut().then(ui.signOutSuccess).catch(ui.signOutFailure)
 }
 
+const onSignBackIn = function () {
+  ui.signBackIn()
+}
+
 module.exports = {
   onSignIn,
   onSignUp,
   onChangePassword,
-  onSignOut
+  onSignOut,
+  onSignBackIn
 }
