@@ -33,9 +33,9 @@ const signInFailure = function () {
 }
 
 const changePasswordSuccess = function (res) {
+  $('#change-password').trigger('reset')
   $('h1').text('Password Successfully Changed')
   $('h2').text('Sign in with your new password next time!')
-  $('#gameboard').addClass('hide')
 
   $('.modal').modal('hide')
 }
@@ -52,6 +52,8 @@ const signOutSuccess = function (res) {
   $('#change-password').addClass('hide')
   $('#sign-out').addClass('hide')
   $('#sign-back-in').removeClass('hide')
+  $('.box').removeClass('x')
+  $('.box').removeClass('o')
 
   // setTimeout(() => {
   //
