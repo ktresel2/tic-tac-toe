@@ -2,7 +2,8 @@
 
 const api = require('./api')
 const ui = require('./ui')
-// const store = require('./../store')
+const winEvents = require('./win-events')
+const store = require('./../store')
 
 const boxes = document.querySelectorAll('.box')
 
@@ -45,23 +46,29 @@ const playMove = function (e) {
   } else if (e.target.classList.contains('o')) {
     value = 'o'
   }
-  let over = false
-  // store.game.cells[playSquareId] = value
+  store.game.cells[playSquareId] = value
+  winEvents.checkForWin(store)
   const data = {
     game: {
       cell: {
         index: playSquareId,
         value: value
       },
-      over: over
+      over: store.game.over
     }
   }
   api.updateGame(data).then(ui.onMoveSuccess).catch(ui.onMoveFailure)
-  console.log(playSquareId)
+  // console.log(store)
   // console.log(data)
+}
+
+const restart = function () {
+  api.createGame().then(ui.onStartSuccess).catch(ui.onStartFailure)
+
 }
 
 module.exports = {
   startGame,
-  playMove
+  playMove,
+  restart
 }

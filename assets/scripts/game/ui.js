@@ -12,9 +12,12 @@ const onStartSuccess = function (res) {
   $('h2').text('')
   $('#start-btn-area').addClass('hide')
   $('#gameboard').removeClass('hide')
+  $('#restart').removeClass('hide')
+  $('.box').removeClass('x')
+  $('.box').removeClass('o')
 
   store.game = res.game
-  console.log(store)
+  // console.log(store)
 }
 
 const onMoveSuccess = function (res) {

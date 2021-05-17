@@ -52,6 +52,8 @@ const signOutSuccess = function (res) {
   $('#change-password').addClass('hide')
   $('#sign-out').addClass('hide')
   $('#sign-back-in').removeClass('hide')
+  $('#restart').addClass('hide')
+  $('#start-btn-area').addClass('hide')
   $('.box').removeClass('x')
   $('.box').removeClass('o')
 
