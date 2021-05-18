@@ -17,7 +17,7 @@ const signUpFailure = function () {
 const signInSuccess = function (res) {
   $('#sign-in').trigger('reset')
   $('h1').text('Welcome')
-  $('h2').text('Signed in. Click below to get started')
+  $('h2').text(`Signed in. You've played ${res.games.length} games.`)
   $('#unAuth').addClass('hide')
   $('#change-password').removeClass('hide')
   $('#sign-out').removeClass('hide')
@@ -56,10 +56,6 @@ const signOutSuccess = function (res) {
   $('#start-btn-area').addClass('hide')
   $('.box').removeClass('x')
   $('.box').removeClass('o')
-
-  // setTimeout(() => {
-  //
-  // })
 }
 
 const signOutFailure = function (err) {
