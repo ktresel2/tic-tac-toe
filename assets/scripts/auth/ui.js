@@ -31,13 +31,13 @@ const addGameTotal = function (res) {
   $('h2').text(`You've played ${res.games.length} games`)
 }
 
-const signInFailure = function (err) {
+const signInFailure = function () {
   $('h1').text('Unsuccessful')
-  $('h2').text('Username or password incorrect: ' + err)
+  $('h2').text('Username or password incorrect.')
 }
 
 const changePasswordSuccess = function (res) {
-  $('#change-password').trigger('reset')
+  $('#change-password-form').trigger('reset')
   $('h1').text('Password Successfully Changed')
   $('h2').text('Sign in with your new password next time!')
 
@@ -45,7 +45,8 @@ const changePasswordSuccess = function (res) {
 }
 
 const changePasswordFailure = function () {
-  $('h2').text('Make sure your passwords match')
+  $('h1').text('Unsuccessful')
+  $('h2').text('Password reset failure')
 }
 
 const signOutSuccess = function (res) {
@@ -63,7 +64,7 @@ const signOutSuccess = function (res) {
 }
 
 const signOutFailure = function (err) {
-  $('h2').text('Failed with error: ' + err)
+  $('h2').text('Sign out error')
 }
 
 const signBackIn = function () {

@@ -13,9 +13,9 @@ for (let i = 0; i < boxes.length; i++) {
 
 let over = false
 
-const showAll = function () {
-  api.indexGames().then(ui.showGames).catch(ui.dontShow)
-}
+// const showAll = function () {
+//   api.indexGames().then(ui.showGames)
+// }
 
 const startGame = function () {
   $('.box').removeClass('x')
@@ -27,7 +27,7 @@ const startGame = function () {
 const playMove = function (e) {
   const playSquare = e.target
   const playSquareId = playSquare.id
-  if (!e.target.classList.contains('x') && !e.target.classList.contains('o')) {
+  if (!playSquare.classList.contains('x') && !playSquare.classList.contains('o')) {
     ui.play(playSquare)
   }
   let value
@@ -52,6 +52,6 @@ const playMove = function (e) {
 
 module.exports = {
   startGame,
-  playMove,
-  showAll
+  playMove
+  // showAll
 }

@@ -18,6 +18,10 @@ const onGameOver = function (winner) {
   }
 }
 
+// const onMoveFail = function () {
+//   $('h1').text("Can't move here!")
+// }
+
 const onStartSuccess = function (res) {
   $('h1').text('Have fun!')
   $('h2').text('')
@@ -33,7 +37,7 @@ const onStartSuccess = function (res) {
 const onMoveSuccess = function (res) {
   if (res.game.over !== true) {
     $('h1').text('Have fun!')
-    // $('h2').text('')
+    $('h2').text('')
   }
 
   store.game = res.game
@@ -61,6 +65,7 @@ const play = function (square) {
 module.exports = {
   onStartSuccess,
   onMoveSuccess,
+  // onMoveFail,
   play,
   // showGames,
   myTurn,
