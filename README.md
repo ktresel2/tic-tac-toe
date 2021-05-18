@@ -1,7 +1,7 @@
 My TIC-TAC-TOE game
 
 Wireframes:
-![TTT-wireframes](C:\Users\ktres\Downloads/image_67148801)
+![TTT-wireframes](https://imgur.com/a/biCWQlK)
 
 User Stores:
 As a new user, I want to create an account to gain access to the game.
