@@ -33,6 +33,7 @@ const onStartSuccess = function (res) {
 const onMoveSuccess = function (res) {
   if (res.game.over !== true) {
     $('h1').text('Have fun!')
+    // $('h2').text('')
   }
 
   store.game = res.game
