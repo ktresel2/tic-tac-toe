@@ -33,7 +33,7 @@ const createGame = function () {
     }
   })
 }
-// LOST HERE!!
+
 const updateGame = function (data) {
   return $.ajax({
     method: 'PATCH',

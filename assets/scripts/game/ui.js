@@ -2,7 +2,7 @@
 // store.game = res.game
 
 const store = require('./../store')
-const winEvents = require('./win-events')
+// const winEvents = require('./win-events')
 
 let myTurn = true
 
@@ -12,20 +12,14 @@ const onStartSuccess = function (res) {
   $('#start-btn-area').addClass('hide')
   $('#gameboard').removeClass('hide')
   $('#restart').removeClass('hide')
-  winEvents.boxesCounted = 0
+  store.boxesCounted = 0
   myTurn = true
 
   store.game = res.game
-  console.log(store.game.over)
-  console.log(res)
-
-  // console.log(store)
 }
 
 const onMoveSuccess = function (res) {
-  console.log(store.game.over)
-  console.log(winEvents.boxesCounted)
-  console.log(res)
+
 }
 
 const playX = function (square) {
@@ -44,14 +38,12 @@ const play = function (square) {
     playO(square)
     myTurn = true
   }
-  winEvents.boxesCounted++
+  store.boxesCounted++
 }
 
 module.exports = {
   onStartSuccess,
   onMoveSuccess,
-  playX,
-  playO,
   play,
   myTurn
 }

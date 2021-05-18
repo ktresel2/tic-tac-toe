@@ -40,14 +40,13 @@ const playMove = function (e) {
         index: playSquareId,
         value: value
       },
-      over: over
+      over: `${over}`
     }
   }
-  api.updateGame(data).then(ui.onMoveSuccess).catch(ui.onMoveFailure)
+  api.updateGame(data).then(ui.onMovesuccess).catch(ui.onMoveFailure)
 }
 
 module.exports = {
   startGame,
-  playMove,
-  boxes
+  playMove
 }

@@ -1,6 +1,7 @@
 @import '~bootstrap/scss/bootstrap';
 @import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@200;300;400&display=swap');
 
+
 * {
   box-sizing: border-box;
 }
@@ -10,6 +11,7 @@
 }
 
 body {
+  background-color: rgba(120,20,0,0.2);
   font-family: 'Titillium Web', sans-serif;
 }
 
@@ -21,6 +23,7 @@ h1 {
   color: rgba(200, 20, 20, 0.8);
   font-size: 4rem;
   text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
 h2 {
@@ -33,22 +36,35 @@ h2 {
   margin: auto;
   padding: 0;
 
-  & section form {
-    background-image: linear-gradient(to right, rgba(20, 20, 200, 0.2), rgba(20, 10, 111, 0.2), rgba(20, 20, 200, 0.3));
+  & form {
+    background-image: linear-gradient(to right, rgba(120, 120, 20, 0.2), rgba(20, 10, 111, 0.2), rgba(125, 25, 205, 0.3), rgba(20, 20, 120, 0.3));
     border-radius: 30px;
     height: auto;
     margin: auto;
-    box-shadow: 10px 10px 10px 5px rgba(0,0,0,0.4);
+    box-shadow: 5px 5px 10px 5px rgba(0,0,0,0.4);
     border: 2px solid purple;
 
     & h3 {
-      color: rgba(200, 20, 200, 0.8);
+      color: rgba(20, 20, 200, 0.8);
+      font-weight: bold;
+      letter-spacing: 2px;
     }
     & button {
       font-weight: bold;
       letter-spacing: 2px;
       padding: 15px;
     }
+  }
+}
+
+button {
+  border-radius: 20px;
+  box-shadow: 2px 2px 5px 1px rgba(25,20,1,0.4);
+
+  &:active {
+    transform: translateY(-3px) scale(0.95);
+    outline: none;
+    box-shadow: 3px 3px 10px 10px rgba(0, 0, 0, 0.2);
   }
 }
 
@@ -72,20 +88,44 @@ h2 {
 
 .box {
   background-color: rgba(20, 44, 45, 0.1);
-  border: 1px solid white;
   height: 33%;
   padding: 0;
   cursor: pointer;
   border: 1px solid brown;
+  position: relative;
 
   &.x {
-    background-color: red;
+    background-color: rgba(90, 40, 90, 0.3);
     cursor: not-allowed;
+
+    &::before {
+      content: 'x';
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      top: 10;
+      left: 0;
+      font-size: 8rem;
+      text-align: center;
+      justify-content: center;
+    }
   }
 
   &.o {
-    background-color: green;
+    background-color: rgba(200, 40, 40, 0.3);
     cursor: not-allowed;
+
+    &::before {
+      content: 'o';
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      top: 10;
+      left: 0;
+      font-size: 8rem;
+      text-align: center;
+      justify-content: center;
+    }
   }
 }
 
@@ -99,7 +139,6 @@ h2 {
 }
 
 @media (max-width: 600px) {
-
   form {
     margin-top: 40px;
     max-width: 70vw;

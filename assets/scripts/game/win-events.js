@@ -2,11 +2,11 @@
 
 const store = require('./../store')
 
-let boxesCounted = 0
+store.boxesCounted = 0
 
 const checkForOver = function () {
   const winner = checkForWin()
-  if (boxesCounted < 9 && winner === undefined) {
+  if (store.boxesCounted < 9 && winner === undefined) {
     return false
   } else {
     gameOver(winner)
@@ -50,6 +50,5 @@ const gameOver = function (winner) {
 module.exports = {
   checkForWin,
   checkForOver,
-  gameOver,
-  boxesCounted
+  gameOver
 }
