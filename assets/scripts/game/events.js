@@ -8,28 +8,15 @@ const store = require('./../store')
 const boxes = document.querySelectorAll('.box')
 
 for (let i = 0; i < boxes.length; i++) {
-  boxes[i].id = [i]
+  boxes[i].id = i
 }
 
-let myTurn = true
-
-const playX = function (square) {
-  square.classList.add('x')
-}
-
-const playO = function (square) {
-  square.classList.add('o')
-}
-
-const play = function (square) {
-  if (myTurn === true) {
-    playX(square)
-  } else {
-    playO(square)
-  }
-}
+let over = false
 
 const startGame = function () {
+  $('.box').removeClass('x')
+  $('.box').removeClass('o')
+  $('.box').on('click', playMove)
   api.createGame().then(ui.onStartSuccess).catch(ui.onStartFailure)
 }
 
@@ -37,8 +24,7 @@ const playMove = function (e) {
   const playSquare = e.target
   const playSquareId = playSquare.id
   if (!e.target.classList.contains('x') && !e.target.classList.contains('o')) {
-    play(playSquare)
-    myTurn = !myTurn
+    ui.play(playSquare)
   }
   let value
   if (e.target.classList.contains('x')) {
@@ -47,28 +33,21 @@ const playMove = function (e) {
     value = 'o'
   }
   store.game.cells[playSquareId] = value
-  winEvents.checkForWin(store)
+  over = winEvents.checkForOver()
   const data = {
     game: {
       cell: {
         index: playSquareId,
         value: value
       },
-      over: store.game.over
+      over: over
     }
   }
   api.updateGame(data).then(ui.onMoveSuccess).catch(ui.onMoveFailure)
-  // console.log(store)
-  // console.log(data)
-}
-
-const restart = function () {
-  api.createGame().then(ui.onStartSuccess).catch(ui.onStartFailure)
-
 }
 
 module.exports = {
   startGame,
   playMove,
-  restart
+  boxes
 }

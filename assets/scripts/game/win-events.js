@@ -1,18 +1,17 @@
 'use strict'
 
 const store = require('./../store')
-const gameEvents = require('./events')
 
-const xWins = function () {
-  store.game.over = true
-  $('.box').off('click', gameEvents.playMove)
-  $('h1').text('X wins!')
-}
+let boxesCounted = 0
 
-const yWins = function () {
-  store.game.over = true
-  $('.box').off('click', gameEvents.playMove)
-  $('h1').text('Y wins!')
+const checkForOver = function () {
+  const winner = checkForWin()
+  if (boxesCounted < 9 && winner === undefined) {
+    return false
+  } else {
+    gameOver(winner)
+    return true
+  }
 }
 
 const checkForWin = function () {
@@ -24,9 +23,7 @@ const checkForWin = function () {
     (store.game.cells[1] === 'x' && store.game.cells[4] === 'x' && store.game.cells[7] === 'x') ||
     (store.game.cells[2] === 'x' && store.game.cells[5] === 'x' && store.game.cells[8] === 'x') ||
     (store.game.cells[2] === 'x' && store.game.cells[4] === 'x' && store.game.cells[6] === 'x')) {
-    store.game.over = true
-    console.log(store.game.cells)
-    return xWins()
+    return 'x'
   } else if ((store.game.cells[0] === 'o' && store.game.cells[1] === 'o' && store.game.cells[2] === 'o') ||
     (store.game.cells[3] === 'o' && store.game.cells[4] === 'o' && store.game.cells[5] === 'o') ||
     (store.game.cells[6] === 'o' && store.game.cells[7] === 'o' && store.game.cells[8] === 'o') ||
@@ -35,19 +32,24 @@ const checkForWin = function () {
     (store.game.cells[1] === 'o' && store.game.cells[4] === 'o' && store.game.cells[7] === 'o') ||
     (store.game.cells[2] === 'o' && store.game.cells[5] === 'o' && store.game.cells[8] === 'o') ||
     (store.game.cells[2] === 'o' && store.game.cells[4] === 'o' && store.game.cells[6] === 'o')) {
-    store.game.over = true
-    console.log(store.game.cells)
-    return yWins()
-  }
+    return 'o'
+  } else { return undefined }
 }
 
-const tieGame = function () {
-
+const gameOver = function (winner) {
+  $('.box').off('click')
+  store.game.over = true
+  if (winner === undefined) {
+    $('h1').text('Tie game!')
+  } else {
+    $('h1').text(`${winner} wins!`)
+  }
+  return true
 }
 
 module.exports = {
   checkForWin,
-  xWins,
-  yWins,
-  checkForTie
+  checkForOver,
+  gameOver,
+  boxesCounted
 }

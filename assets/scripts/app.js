@@ -17,6 +17,6 @@ $(() => {
   $('#sign-back-in').on('click', authEvents.onSignBackIn)
 
   $('#start-game').on('click', gameEvents.startGame)
+  $('#restart').on('click', gameEvents.startGame)
   $('.box').on('click', gameEvents.playMove)
-  $('#restart').on('click', gameEvents.restart)
 })

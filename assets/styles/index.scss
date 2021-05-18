@@ -1,4 +1,5 @@
 @import '~bootstrap/scss/bootstrap';
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@200;300;400&display=swap');
 
 * {
   box-sizing: border-box;
@@ -9,7 +10,7 @@
 }
 
 body {
-  background-image: linear-gradient(to right, rgba(20, 20, 200, 0.3), rgba(20, 120, 11, 0.2), rgba(20, 200, 200, 0.3));
+  font-family: 'Titillium Web', sans-serif;
 }
 
 h1, h2 {
@@ -18,6 +19,8 @@ h1, h2 {
 
 h1 {
   color: rgba(200, 20, 20, 0.8);
+  font-size: 4rem;
+  text-transform: uppercase;
 }
 
 h2 {
@@ -31,16 +34,20 @@ h2 {
   padding: 0;
 
   & section form {
-    background-color: lightblue;
+    background-image: linear-gradient(to right, rgba(20, 20, 200, 0.2), rgba(20, 10, 111, 0.2), rgba(20, 20, 200, 0.3));
     border-radius: 30px;
     height: auto;
     margin: auto;
-    box-shadow: 10px 10px 50px rgba(0,0,0,0.4);
+    box-shadow: 10px 10px 10px 5px rgba(0,0,0,0.4);
     border: 2px solid purple;
 
     & h3 {
       color: rgba(200, 20, 200, 0.8);
-
+    }
+    & button {
+      font-weight: bold;
+      letter-spacing: 2px;
+      padding: 15px;
     }
   }
 }
@@ -64,11 +71,12 @@ h2 {
 }
 
 .box {
-  background-color: #ff66f6;
+  background-color: rgba(20, 44, 45, 0.1);
   border: 1px solid white;
   height: 33%;
   padding: 0;
   cursor: pointer;
+  border: 1px solid brown;
 
   &.x {
     background-color: red;
@@ -91,12 +99,9 @@ h2 {
 }
 
 @media (max-width: 600px) {
-  h1,
-  h2 {
-    font-size: .9rem;
-  }
 
   form {
+    margin-top: 40px;
     max-width: 70vw;
   }
 
