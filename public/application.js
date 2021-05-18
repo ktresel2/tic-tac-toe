@@ -3980,6 +3980,10 @@ var onGameOver = function onGameOver(winner) {
   }
 };
 
+// const onMoveFail = function () {
+//   $('h1').text("Can't move here!")
+// }
+
 var onStartSuccess = function onStartSuccess(res) {
   $('h1').text('Have fun!');
   $('h2').text('');
@@ -3995,7 +3999,7 @@ var onStartSuccess = function onStartSuccess(res) {
 var onMoveSuccess = function onMoveSuccess(res) {
   if (res.game.over !== true) {
     $('h1').text('Have fun!');
-    // $('h2').text('')
+    $('h2').text('');
   }
 
   store.game = res.game;
@@ -4023,6 +4027,7 @@ var play = function play(square) {
 module.exports = {
   onStartSuccess: onStartSuccess,
   onMoveSuccess: onMoveSuccess,
+  // onMoveFail,
   play: play,
   // showGames,
   myTurn: myTurn,
@@ -16935,13 +16940,13 @@ var addGameTotal = function addGameTotal(res) {
   $('h2').text('You\'ve played ' + res.games.length + ' games');
 };
 
-var signInFailure = function signInFailure(err) {
+var signInFailure = function signInFailure() {
   $('h1').text('Unsuccessful');
-  $('h2').text('Username or password incorrect: ' + err);
+  $('h2').text('Username or password incorrect.');
 };
 
 var changePasswordSuccess = function changePasswordSuccess(res) {
-  $('#change-password').trigger('reset');
+  $('#change-password-form').trigger('reset');
   $('h1').text('Password Successfully Changed');
   $('h2').text('Sign in with your new password next time!');
 
@@ -16949,7 +16954,8 @@ var changePasswordSuccess = function changePasswordSuccess(res) {
 };
 
 var changePasswordFailure = function changePasswordFailure() {
-  $('h2').text('Make sure your passwords match');
+  $('h1').text('Unsuccessful');
+  $('h2').text('Password reset failure');
 };
 
 var signOutSuccess = function signOutSuccess(res) {
@@ -16967,7 +16973,7 @@ var signOutSuccess = function signOutSuccess(res) {
 };
 
 var signOutFailure = function signOutFailure(err) {
-  $('h2').text('Failed with error: ' + err);
+  $('h2').text('Sign out error');
 };
 
 var signBackIn = function signBackIn() {
@@ -17011,9 +17017,9 @@ for (var i = 0; i < boxes.length; i++) {
 
 var over = false;
 
-var showAll = function showAll() {
-  api.indexGames().then(ui.showGames).catch(ui.dontShow);
-};
+// const showAll = function () {
+//   api.indexGames().then(ui.showGames)
+// }
 
 var startGame = function startGame() {
   $('.box').removeClass('x');
@@ -17025,7 +17031,7 @@ var startGame = function startGame() {
 var playMove = function playMove(e) {
   var playSquare = e.target;
   var playSquareId = playSquare.id;
-  if (!e.target.classList.contains('x') && !e.target.classList.contains('o')) {
+  if (!playSquare.classList.contains('x') && !playSquare.classList.contains('o')) {
     ui.play(playSquare);
   }
   var value = void 0;
@@ -17050,8 +17056,8 @@ var playMove = function playMove(e) {
 
 module.exports = {
   startGame: startGame,
-  playMove: playMove,
-  showAll: showAll
+  playMove: playMove
+  // showAll
 };
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(29)))
 
