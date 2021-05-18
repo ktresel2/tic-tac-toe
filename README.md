@@ -1,7 +1,7 @@
 My TIC-TAC-TOE game
 
 Wireframes:
-![TTT-wireframes]('public/image_67148801.jpg')
+![TTT-wireframes](public/image_67148801.jpg)
 
 User Stories:
 
