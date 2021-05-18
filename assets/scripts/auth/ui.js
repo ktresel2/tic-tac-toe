@@ -3,10 +3,10 @@
 const store = require('./../store')
 
 const signUpSuccess = function (res) {
-  $('#sign-up').addClass('hide')
   $('#sign-up').trigger('reset')
-  $('h1').text('Welcome')
-  $('h2').text('Signed up successfully')
+  $('#sign-in').trigger('reset')
+  $('h1').text('Signed up successfully')
+  $('h2').text('Log in or create another account.')
 }
 
 const signUpFailure = function () {

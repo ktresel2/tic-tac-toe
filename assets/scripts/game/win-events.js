@@ -1,6 +1,7 @@
 'use strict'
 
 const store = require('./../store')
+const ui = require('./ui')
 
 store.boxesCounted = 0
 
@@ -9,7 +10,7 @@ const checkForOver = function () {
   if (store.boxesCounted < 9 && winner === undefined) {
     return false
   } else {
-    gameOver(winner)
+    ui.onGameOver(winner)
     return true
   }
 }
@@ -36,19 +37,6 @@ const checkForWin = function () {
   } else { return undefined }
 }
 
-const gameOver = function (winner) {
-  $('.box').off('click')
-  store.game.over = true
-  if (winner === undefined) {
-    $('h1').text('Tie game!')
-  } else {
-    $('h1').text(`${winner} wins!`)
-  }
-  return true
-}
-
 module.exports = {
-  checkForWin,
-  checkForOver,
-  gameOver
+  checkForOver
 }
