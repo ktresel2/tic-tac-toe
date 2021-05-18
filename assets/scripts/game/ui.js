@@ -1,10 +1,22 @@
-// create game
-// store.game = res.game
+'use strict'
 
 const store = require('./../store')
-// const winEvents = require('./win-events')
 
 let myTurn = true
+
+// const showGames = function (res) {
+//   console.log(res)
+// }
+
+const onGameOver = function (winner) {
+  $('.box').off('click')
+  store.game.over = true
+  if (winner === undefined) {
+    $('h1').text('Tie game!')
+  } else {
+    $('h1').text(`${winner} wins!`)
+  }
+}
 
 const onStartSuccess = function (res) {
   $('h1').text('Have fun!')
@@ -19,7 +31,11 @@ const onStartSuccess = function (res) {
 }
 
 const onMoveSuccess = function (res) {
+  if (res.game.over !== true) {
+    $('h1').text('Have fun!')
+  }
 
+  store.game = res.game
 }
 
 const playX = function (square) {
@@ -45,5 +61,7 @@ module.exports = {
   onStartSuccess,
   onMoveSuccess,
   play,
-  myTurn
+  // showGames,
+  myTurn,
+  onGameOver
 }

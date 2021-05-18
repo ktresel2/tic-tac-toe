@@ -1,6 +1,8 @@
 @import '~bootstrap/scss/bootstrap';
 @import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@200;300;400&display=swap');
 
+@import 'variables';
+
 
 * {
   box-sizing: border-box;
@@ -11,7 +13,7 @@
 }
 
 body {
-  background-color: rgba(120,20,0,0.2);
+  background-color: $body-background;
   font-family: 'Titillium Web', sans-serif;
 }
 
@@ -20,14 +22,14 @@ h1, h2 {
 }
 
 h1 {
-  color: rgba(200, 20, 20, 0.8);
+  color: $h1-primary;
   font-size: 4rem;
   text-transform: uppercase;
   letter-spacing: 2px;
 }
 
 h2 {
-  color: rgba(20, 120, 20, 0.8);
+  color: $h2-primary;
 }
 
 .container {
@@ -36,16 +38,16 @@ h2 {
   margin: auto;
   padding: 0;
 
-  & form {
-    background-image: linear-gradient(to right, rgba(120, 120, 20, 0.2), rgba(20, 10, 111, 0.2), rgba(125, 25, 205, 0.3), rgba(20, 20, 120, 0.3));
+  & #sign-up, #sign-in {
+    background-image: $form-bg-primary;
     border-radius: 30px;
     height: auto;
     margin: auto;
-    box-shadow: 5px 5px 10px 5px rgba(0,0,0,0.4);
+    box-shadow: 5px 5px 10px 5px $box-shadow-color;
     border: 2px solid purple;
 
     & h3 {
-      color: rgba(20, 20, 200, 0.8);
+      color: $h3-primary;
       font-weight: bold;
       letter-spacing: 2px;
     }
@@ -59,12 +61,12 @@ h2 {
 
 button {
   border-radius: 20px;
-  box-shadow: 2px 2px 5px 1px rgba(25,20,1,0.4);
+  box-shadow: 2px 2px 5px 1px $box-shadow-color;
 
   &:active {
     transform: translateY(-3px) scale(0.95);
     outline: none;
-    box-shadow: 3px 3px 10px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 3px 3px 10px 10px $box-shadow-color;
   }
 }
 
@@ -87,7 +89,7 @@ button {
 }
 
 .box {
-  background-color: rgba(20, 44, 45, 0.1);
+  background-color: $box-color-primary;
   height: 33%;
   padding: 0;
   cursor: pointer;
@@ -95,7 +97,7 @@ button {
   position: relative;
 
   &.x {
-    background-color: rgba(90, 40, 90, 0.3);
+    background-color: $box-color-x;
     cursor: not-allowed;
 
     &::before {
@@ -112,7 +114,7 @@ button {
   }
 
   &.o {
-    background-color: rgba(200, 40, 40, 0.3);
+    background-color: $box-color-o;
     cursor: not-allowed;
 
     &::before {
@@ -136,6 +138,12 @@ button {
   button {
     padding: 1.5rem 2rem;
   }
+}
+
+.modal button.close {
+  box-shadow: none;
+  border: none;
+  border-radius: 50%;
 }
 
 @media (max-width: 600px) {

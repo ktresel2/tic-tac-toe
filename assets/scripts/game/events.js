@@ -13,6 +13,10 @@ for (let i = 0; i < boxes.length; i++) {
 
 let over = false
 
+const showAll = function () {
+  api.indexGames().then(ui.showGames).catch(ui.dontShow)
+}
+
 const startGame = function () {
   $('.box').removeClass('x')
   $('.box').removeClass('o')
@@ -43,10 +47,11 @@ const playMove = function (e) {
       over: `${over}`
     }
   }
-  api.updateGame(data).then(ui.onMovesuccess).catch(ui.onMoveFailure)
+  api.updateGame(data).then(ui.onMoveSuccess)
 }
 
 module.exports = {
   startGame,
-  playMove
+  playMove,
+  showAll
 }
