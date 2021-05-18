@@ -18,11 +18,6 @@ const signUpFailure = function () {
 const signInSuccess = function (res) {
   $('#sign-in').trigger('reset')
   $('h1').text('Welcome')
-<<<<<<< HEAD
-  $('h2').text(`Signed in. You've played ${res.games.length} games.`)
-=======
-  // $('h2').text(`Signed in. You've played ${res} games.`)
->>>>>>> dev
   $('#unAuth').addClass('hide')
   $('#change-password').removeClass('hide')
   $('#sign-out').removeClass('hide')
