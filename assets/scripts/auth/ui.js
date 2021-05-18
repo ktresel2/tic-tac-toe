@@ -1,6 +1,7 @@
 'use strict'
 
 const store = require('./../store')
+const gameApi = require('./../game/api')
 
 const signUpSuccess = function (res) {
   $('#sign-up').trigger('reset')
@@ -17,19 +18,23 @@ const signUpFailure = function () {
 const signInSuccess = function (res) {
   $('#sign-in').trigger('reset')
   $('h1').text('Welcome')
-  $('h2').text('Signed in. Click below to get started')
+  // $('h2').text(`Signed in. You've played ${res} games.`)
   $('#unAuth').addClass('hide')
   $('#change-password').removeClass('hide')
   $('#sign-out').removeClass('hide')
   $('#start-btn-area').removeClass('hide')
 
-  console.log(res)
   store.user = res.user
+  gameApi.indexGames().then(addGameTotal)
 }
 
-const signInFailure = function () {
+const addGameTotal = function (res) {
+  $('h2').text(`You've played ${res.games.length} games`)
+}
+
+const signInFailure = function (err) {
   $('h1').text('Unsuccessful')
-  $('h2').text('Username or password incorrect')
+  $('h2').text('Username or password incorrect: ' + err)
 }
 
 const changePasswordSuccess = function (res) {
@@ -56,14 +61,10 @@ const signOutSuccess = function (res) {
   $('#start-btn-area').addClass('hide')
   $('.box').removeClass('x')
   $('.box').removeClass('o')
-
-  // setTimeout(() => {
-  //
-  // })
 }
 
 const signOutFailure = function (err) {
-  $('h2').text('Failed with error ' + err)
+  $('h2').text('Failed with error: ' + err)
 }
 
 const signBackIn = function () {
