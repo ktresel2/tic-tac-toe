@@ -3,15 +3,13 @@
 const store = require('./../store')
 const ui = require('./ui')
 
-// not necessary, look at what cells are empty
-store.boxesCounted = 0
-
 const checkForOver = function () {
   const winner = checkForWin()
   if (store.boxesCounted < 9 && winner === null) {
     return false
   } else {
     ui.onGameOver(winner)
+    store.game.over = true
     return true
   }
 }
