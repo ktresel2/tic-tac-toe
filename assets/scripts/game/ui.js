@@ -9,7 +9,7 @@ let myTurn = true
 // }
 
 const onGameOver = function (winner) {
-  if (winner === undefined) {
+  if (winner === null) {
     $('h1').text('Tie game!')
   } else {
     $('h1').text(`${winner} wins!`)
