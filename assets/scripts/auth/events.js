@@ -8,7 +8,6 @@ const ui = require('./ui')
 const onSignIn = function (e) {
   e.preventDefault()
   const data = getFormFields(e.target)
-  console.log(data)
 
   api.signIn(data).then(ui.signInSuccess).catch(ui.signInFailure)
 }

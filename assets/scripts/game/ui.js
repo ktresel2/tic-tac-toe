@@ -9,8 +9,6 @@ let myTurn = true
 // }
 
 const onGameOver = function (winner) {
-  $('.box').off('click')
-  store.game.over = true
   if (winner === undefined) {
     $('h1').text('Tie game!')
   } else {
@@ -39,6 +37,15 @@ const onMoveSuccess = function (res) {
   store.game = res.game
 }
 
+const onMoveFailure = function () {
+  // console.log('heyyy')
+  if (store.game.over === true) {
+    $('h2').text('Game over! No more moves allowed.')
+  } else {
+    $('h1').text("Can't go here!")
+  }
+}
+
 const playX = function (square) {
   square.classList.add('x')
 }
@@ -55,7 +62,6 @@ const play = function (square) {
     playO(square)
     myTurn = true
   }
-  store.boxesCounted++
 }
 
 module.exports = {
@@ -63,6 +69,7 @@ module.exports = {
   onMoveSuccess,
   play,
   // showGames,
+  onMoveFailure,
   myTurn,
   onGameOver
 }

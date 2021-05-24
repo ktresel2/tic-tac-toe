@@ -3,14 +3,13 @@
 const store = require('./../store')
 const ui = require('./ui')
 
-store.boxesCounted = 0
-
 const checkForOver = function () {
   const winner = checkForWin()
   if (store.boxesCounted < 9 && winner === undefined) {
     return false
   } else {
     ui.onGameOver(winner)
+    store.game.over = true
     return true
   }
 }
