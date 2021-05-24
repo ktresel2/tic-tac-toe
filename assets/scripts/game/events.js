@@ -5,6 +5,7 @@ const ui = require('./ui')
 const winEvents = require('./win-events')
 const store = require('./../store')
 
+// jQuery
 const boxes = document.querySelectorAll('.box')
 
 for (let i = 0; i < boxes.length; i++) {
@@ -44,7 +45,7 @@ const playMove = function (e) {
         index: playSquareId,
         value: value
       },
-      over: `${over}`
+      over: over
     }
   }
   api.updateGame(data).then(ui.onMoveSuccess)
