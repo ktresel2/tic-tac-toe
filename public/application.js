@@ -3971,9 +3971,7 @@ var myTurn = true;
 // }
 
 var onGameOver = function onGameOver(winner) {
-  $('.box').off('click');
-  store.game.over = true;
-  if (winner === undefined) {
+  if (winner === null) {
     $('h1').text('Tie game!');
   } else {
     $('h1').text(winner + ' wins!');
@@ -4005,6 +4003,15 @@ var onMoveSuccess = function onMoveSuccess(res) {
   store.game = res.game;
 };
 
+var onMoveFailure = function onMoveFailure() {
+  // console.log('heyyy')
+  if (store.game.over === true) {
+    $('h2').text('Game over! No more moves allowed.');
+  } else {
+    $('h1').text("Can't go here!");
+  }
+};
+
 var playX = function playX(square) {
   square.classList.add('x');
 };
@@ -4021,7 +4028,6 @@ var play = function play(square) {
     playO(square);
     myTurn = true;
   }
-  store.boxesCounted++;
 };
 
 module.exports = {
@@ -4030,6 +4036,7 @@ module.exports = {
   // onMoveFail,
   play: play,
   // showGames,
+  onMoveFailure: onMoveFailure,
   myTurn: myTurn,
   onGameOver: onGameOver
 };
@@ -16728,7 +16735,6 @@ var ui = __webpack_require__(345);
 var onSignIn = function onSignIn(e) {
   e.preventDefault();
   var data = getFormFields(e.target);
-  console.log(data);
 
   api.signIn(data).then(ui.signInSuccess).catch(ui.signInFailure);
 };
@@ -17009,6 +17015,7 @@ var ui = __webpack_require__(134);
 var winEvents = __webpack_require__(347);
 var store = __webpack_require__(48);
 
+// jQuery
 var boxes = document.querySelectorAll('.box');
 
 for (var i = 0; i < boxes.length; i++) {
@@ -17018,40 +17025,54 @@ for (var i = 0; i < boxes.length; i++) {
 var over = false;
 
 // const showAll = function () {
-//   api.indexGames().then(ui.showGames)
+//   api.indexGames().then(ui.showGames).catch(ui.dontShow)
 // }
 
 var startGame = function startGame() {
   $('.box').removeClass('x');
   $('.box').removeClass('o');
-  $('.box').on('click', playMove);
   api.createGame().then(ui.onStartSuccess).catch(ui.onStartFailure);
 };
 
 var playMove = function playMove(e) {
-  var playSquare = e.target;
-  var playSquareId = playSquare.id;
-  if (!playSquare.classList.contains('x') && !playSquare.classList.contains('o')) {
-    ui.play(playSquare);
-  }
-  var value = void 0;
-  if (e.target.classList.contains('x')) {
-    value = 'x';
-  } else if (e.target.classList.contains('o')) {
-    value = 'o';
-  }
-  store.game.cells[playSquareId] = value;
   over = winEvents.checkForOver();
-  var data = {
-    game: {
-      cell: {
-        index: playSquareId,
-        value: value
-      },
-      over: '' + over
+  store.game.over = over;
+  if (store.game.over === true) {
+    return ui.onMoveFailure();
+  } else {
+    var playSquare = e.target;
+    if ($(playSquare).hasClass('x') || $(playSquare).hasClass('o')) {
+      return ui.onMoveFailure();
     }
-  };
-  api.updateGame(data).then(ui.onMoveSuccess);
+    var playSquareId = playSquare.id;
+    if (!e.target.classList.contains('x') && !e.target.classList.contains('o') && store.over !== true) {
+      ui.play(playSquare);
+      store.boxesCounted++;
+    }
+    var value = void 0;
+    if ($(playSquare).hasClass('x')) {
+      value = 'x';
+    } else if ($(playSquare).hasClass('o')) {
+      value = 'o';
+    }
+    store.game.cells[playSquareId] = value;
+    // console.log(store.boxesCounted)
+    // console.log(store.game)
+    over = winEvents.checkForOver();
+    if (over === true) {
+      store.game.over = true;
+    }
+    var data = {
+      game: {
+        cell: {
+          index: playSquareId,
+          value: value
+        },
+        over: over
+      }
+    };
+    api.updateGame(data).then(ui.onMoveSuccess);
+  }
 };
 
 module.exports = {
@@ -17071,25 +17092,25 @@ module.exports = {
 var store = __webpack_require__(48);
 var ui = __webpack_require__(134);
 
-store.boxesCounted = 0;
-
 var checkForOver = function checkForOver() {
   var winner = checkForWin();
-  if (store.boxesCounted < 9 && winner === undefined) {
+  if (store.boxesCounted < 9 && winner === null) {
     return false;
   } else {
     ui.onGameOver(winner);
+    store.game.over = true;
     return true;
   }
 };
 
+// Cut this in half by using whos turn it is
 var checkForWin = function checkForWin() {
   if (store.game.cells[0] === 'x' && store.game.cells[1] === 'x' && store.game.cells[2] === 'x' || store.game.cells[3] === 'x' && store.game.cells[4] === 'x' && store.game.cells[5] === 'x' || store.game.cells[6] === 'x' && store.game.cells[7] === 'x' && store.game.cells[8] === 'x' || store.game.cells[0] === 'x' && store.game.cells[4] === 'x' && store.game.cells[8] === 'x' || store.game.cells[0] === 'x' && store.game.cells[3] === 'x' && store.game.cells[6] === 'x' || store.game.cells[1] === 'x' && store.game.cells[4] === 'x' && store.game.cells[7] === 'x' || store.game.cells[2] === 'x' && store.game.cells[5] === 'x' && store.game.cells[8] === 'x' || store.game.cells[2] === 'x' && store.game.cells[4] === 'x' && store.game.cells[6] === 'x') {
     return 'x';
   } else if (store.game.cells[0] === 'o' && store.game.cells[1] === 'o' && store.game.cells[2] === 'o' || store.game.cells[3] === 'o' && store.game.cells[4] === 'o' && store.game.cells[5] === 'o' || store.game.cells[6] === 'o' && store.game.cells[7] === 'o' && store.game.cells[8] === 'o' || store.game.cells[0] === 'o' && store.game.cells[4] === 'o' && store.game.cells[8] === 'o' || store.game.cells[0] === 'o' && store.game.cells[3] === 'o' && store.game.cells[6] === 'o' || store.game.cells[1] === 'o' && store.game.cells[4] === 'o' && store.game.cells[7] === 'o' || store.game.cells[2] === 'o' && store.game.cells[5] === 'o' && store.game.cells[8] === 'o' || store.game.cells[2] === 'o' && store.game.cells[4] === 'o' && store.game.cells[6] === 'o') {
     return 'o';
   } else {
-    return undefined;
+    return null;
   }
 };
 
