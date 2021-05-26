@@ -15,15 +15,11 @@ const onGameOver = function () {
   }
 }
 
-// const onMoveFail = function () {
-//   $('h1').text("Can't move here!")
-// }
-
 const onStartSuccess = function (res) {
   $('.box').removeClass('x')
   $('.box').removeClass('o')
   $('h1').text('Have fun!')
-  $('h2').text('')
+  $('h2').text("It's X's turn")
   $('#start-btn-area').addClass('hide')
   $('#gameboard').removeClass('hide')
   $('#restart').removeClass('hide')
@@ -42,7 +38,7 @@ const onMoveSuccess = function (res) {
     $('h2').text('')
   } else {
     $('h1').text('Have fun!')
-    $('h2').text(`It's ${turn ? 'o' : 'x'}'s turn`)
+    $('h2').text(`It's ${turn ? 'O' : 'X'}'s turn`)
     $('.box').each(function (index) {
       $(this).text(res.game.cells[index])
     })
@@ -56,7 +52,6 @@ const onMoveSuccess = function (res) {
 }
 
 const onMoveFailure = function () {
-  // console.log('heyyy')
   if (store.game.over) {
     $('h2').text('Game over! No more moves allowed.')
   } else {
@@ -84,7 +79,6 @@ const play = function (square) {
 module.exports = {
   onStartSuccess,
   onMoveSuccess,
-  // onMoveFail,
   play,
   onMoveFailure,
   onGameOver

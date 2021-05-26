@@ -12,7 +12,6 @@ const checkForOver = function () {
   }
 }
 
-// Cut this in half by using whos turn it is
 const checkForWin = function () {
   if ((store.game.cells[0] === store.game.cells[1] && store.game.cells[1] === store.game.cells[2] && store.game.cells[2] !== '') ||
       (store.game.cells[6] === store.game.cells[7] && store.game.cells[7] === store.game.cells[8] && store.game.cells[8] !== '') ||
