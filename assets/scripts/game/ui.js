@@ -2,65 +2,75 @@
 
 const store = require('./../store')
 
-let myTurn = true
+let turn = true
 
 // const showGames = function (res) {
 //   console.log(res)
 // }
 
-const onGameOver = function (winner) {
-  if (winner === undefined) {
+const onGameOver = function () {
+  if (!store.game.over) {
     $('h1').text('Tie game!')
   } else {
-    $('h1').text(`${winner} wins!`)
+    $('h1').text(`${store.game.winner} wins!`)
+    $('h2').text('Go again!')
   }
 }
 
 const onStartSuccess = function (res) {
+  $('.box').removeClass('x')
+  $('.box').removeClass('o')
   $('h1').text('Have fun!')
   $('h2').text('')
   $('#start-btn-area').addClass('hide')
   $('#gameboard').removeClass('hide')
   $('#restart').removeClass('hide')
-  store.boxesCounted = 0
-  myTurn = true
-
   store.game = res.game
+  $('.box').each(function (index) {
+    $(this).text(res.game.cells[index])
+  })
+  store.game.winner = 'x'
+  store.boxesCounted = 0
+  turn = true
 }
 
 const onMoveSuccess = function (res) {
-  if (res.game.over !== true) {
+  if (store.game.over) {
+    $('h1').text(`${store.game.winner} wins!`)
+    $('h2').text('')
+  } else {
     $('h1').text('Have fun!')
-    // $('h2').text('')
+    $('h2').text(`It's ${turn ? 'o' : 'x'}'s turn`)
+    $('.box').each(function (index) {
+      $(this).text(res.game.cells[index])
+    })
   }
-
   store.game = res.game
+  turn = !turn
+  return turn
 }
 
 const onMoveFailure = function () {
   // console.log('heyyy')
-  if (store.game.over === true) {
+  if (store.game.over) {
     $('h2').text('Game over! No more moves allowed.')
   } else {
     $('h1').text("Can't go here!")
   }
 }
 
-const playX = function (square) {
-  square.classList.add('x')
-}
-
-const playO = function (square) {
-  square.classList.add('o')
-}
-
 const play = function (square) {
-  if (myTurn === true) {
+  const playX = function (square) {
+    $(square).addClass('x')
+  }
+
+  const playO = function (square) {
+    $(square).addClass('o')
+  }
+  if (turn) {
     playX(square)
-    myTurn = false
   } else {
     playO(square)
-    myTurn = true
   }
 }
 
@@ -70,6 +80,5 @@ module.exports = {
   play,
   // showGames,
   onMoveFailure,
-  myTurn,
   onGameOver
 }

@@ -99,35 +99,17 @@ button {
   &.x {
     background-color: $box-color-x;
     cursor: not-allowed;
-
-    &::before {
-      content: 'x';
-      position: absolute;
-      height: 100%;
-      width: 100%;
-      top: 10;
-      left: 0;
-      font-size: 8rem;
-      text-align: center;
-      justify-content: center;
+    font-size: 8rem;
+    text-align: center;
+    justify-content: center;
     }
-  }
 
   &.o {
     background-color: $box-color-o;
     cursor: not-allowed;
-
-    &::before {
-      content: 'o';
-      position: absolute;
-      height: 100%;
-      width: 100%;
-      top: 10;
-      left: 0;
-      font-size: 8rem;
-      text-align: center;
-      justify-content: center;
-    }
+    font-size: 8rem;
+    text-align: center;
+    justify-content: center;
   }
 }
 
