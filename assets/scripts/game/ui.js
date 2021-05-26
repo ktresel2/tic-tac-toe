@@ -1,18 +1,16 @@
 'use strict'
 
 const store = require('./../store')
+const winEvents = require('./win-events')
 
 let turn = true
 
-// const showGames = function (res) {
-//   console.log(res)
-// }
-
 const onGameOver = function () {
-  if (!store.game.over) {
+  if (store.boxesCounted === 9) {
     $('h1').text('Tie game!')
+    $('h2').text('Go again!')
   } else {
-    $('h1').text(`${store.game.winner} wins!`)
+    $('h1').text(`${store.winner} wins!`)
     $('h2').text('Go again!')
   }
 }
@@ -29,14 +27,14 @@ const onStartSuccess = function (res) {
   $('.box').each(function (index) {
     $(this).text(res.game.cells[index])
   })
-  store.game.winner = 'x'
+  store.game.over = false
   store.boxesCounted = 0
   turn = true
 }
 
 const onMoveSuccess = function (res) {
   if (store.game.over) {
-    $('h1').text(`${store.game.winner} wins!`)
+    $('h1').text(`${store.winner} wins!`)
     $('h2').text('')
   } else {
     $('h1').text('Have fun!')
@@ -46,6 +44,9 @@ const onMoveSuccess = function (res) {
     })
   }
   store.game = res.game
+  if (winEvents.checkForOver()) {
+    onGameOver()
+  }
   turn = !turn
   return turn
 }
@@ -67,18 +68,19 @@ const play = function (square) {
   const playO = function (square) {
     $(square).addClass('o')
   }
+
   if (turn) {
     playX(square)
   } else {
     playO(square)
   }
+  store.boxesCounted++
 }
 
 module.exports = {
   onStartSuccess,
   onMoveSuccess,
   play,
-  // showGames,
   onMoveFailure,
   onGameOver
 }
