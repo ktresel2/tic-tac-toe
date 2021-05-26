@@ -4,7 +4,6 @@ const store = require('./../store')
 const gameApi = require('./../game/api')
 
 const signUpSuccess = function (res) {
-  $('#sign-up').trigger('reset')
   $('#sign-in').trigger('reset')
   $('h1').text('Signed up successfully')
   $('h2').text('Log in or create another account.')
@@ -16,6 +15,7 @@ const signUpFailure = function () {
 }
 
 const signInSuccess = function (res) {
+  $('#sign-up').trigger('reset')
   $('#sign-in').trigger('reset')
   $('h1').text('Welcome')
   $('#unAuth').addClass('hide')

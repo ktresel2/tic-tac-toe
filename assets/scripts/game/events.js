@@ -2,7 +2,6 @@
 
 const api = require('./api')
 const ui = require('./ui')
-const winEvents = require('./win-events')
 const store = require('./../store')
 
 // jQuery
@@ -12,56 +11,36 @@ for (let i = 0; i < boxes.length; i++) {
   boxes[i].id = i
 }
 
-let over = false
-
-// const showAll = function () {
-//   api.indexGames().then(ui.showGames).catch(ui.dontShow)
-// }
+let turn = true
 
 const startGame = function () {
-  $('.box').removeClass('x')
-  $('.box').removeClass('o')
   api.createGame().then(ui.onStartSuccess).catch(ui.onStartFailure)
+  turn = true
 }
 
 const playMove = function (e) {
-  over = winEvents.checkForOver()
-  store.game.over = over
-  if (store.game.over === true) {
-    return ui.onMoveFailure()
+  if (store.game.over) return ui.onMoveFailure()
+  if (e.target.innerText !== '') return ui.onMoveFailure()
+  const playSquare = e.target
+  const playSquareId = playSquare.id
+  const value = turn ? 'x' : 'o'
+  store.winner = value
+  store.game.cells[playSquareId] = value
+  ui.play(playSquare)
+  const data = {
+    game: {
+      cell: {
+        index: playSquareId,
+        value: value
+      },
+      over: store.game.over
+    }
+  }
+  api.updateGame(data).then(ui.onMoveSuccess).catch(ui.onMoveFailure)
+  if (store.game.over) {
+    ui.onGameOver()
   } else {
-    const playSquare = e.target
-    if ($(playSquare).hasClass('x') || $(playSquare).hasClass('o')) {
-      return ui.onMoveFailure()
-    }
-    const playSquareId = playSquare.id
-    if (!e.target.classList.contains('x') && !e.target.classList.contains('o') && store.over !== true) {
-      ui.play(playSquare)
-      store.boxesCounted++
-    }
-    let value
-    if ($(playSquare).hasClass('x')) {
-      value = 'x'
-    } else if ($(playSquare).hasClass('o')) {
-      value = 'o'
-    }
-    store.game.cells[playSquareId] = value
-    // console.log(store.boxesCounted)
-    // console.log(store.game)
-    over = winEvents.checkForOver()
-    if (over === true) {
-      store.game.over = true
-    }
-    const data = {
-      game: {
-        cell: {
-          index: playSquareId,
-          value: value
-        },
-        over: over
-      }
-    }
-    api.updateGame(data).then(ui.onMoveSuccess)
+    turn = !turn
   }
 }
 

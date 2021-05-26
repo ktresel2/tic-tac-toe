@@ -16,7 +16,7 @@ const onSignUp = function (e) {
   e.preventDefault()
   const data = getFormFields(e.target)
 
-  api.signUp(data).then(ui.signUpSuccess).catch(ui.signUpFailure)
+  api.signUp(data).then(ui.signUpSuccess).then(() => onSignIn(e)).catch(ui.signUpFailure)
 }
 
 const onChangePassword = function (e) {
