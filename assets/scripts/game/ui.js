@@ -6,7 +6,7 @@ const winEvents = require('./win-events')
 let turn = true
 
 const onGameOver = function () {
-  if (store.boxesCounted === 9) {
+  if (store.boxesCounted === 9 && !store.game.over) {
     $('h1').text('Tie game!')
     $('h2').text('Go again!')
   } else {
@@ -45,6 +45,7 @@ const onMoveSuccess = function (res) {
   }
   store.game = res.game
   if (winEvents.checkForOver()) {
+    store.game.over = true
     onGameOver()
   }
   turn = !turn
