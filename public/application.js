@@ -16962,9 +16962,7 @@ var playMove = function playMove(e) {
     }
   };
   api.updateGame(data).then(ui.onMoveSuccess).catch(ui.onMoveFailure);
-  if (store.game.over) {
-    ui.onGameOver();
-  } else {
+  if (!store.game.over) {
     turn = !turn;
   }
 };
@@ -16988,7 +16986,7 @@ var winEvents = __webpack_require__(347);
 var turn = true;
 
 var onGameOver = function onGameOver() {
-  if (store.boxesCounted === 9) {
+  if (store.boxesCounted === 9 && !store.game.over) {
     $('h1').text('Tie game!');
     $('h2').text('Go again!');
   } else {
@@ -17027,6 +17025,7 @@ var onMoveSuccess = function onMoveSuccess(res) {
   }
   store.game = res.game;
   if (winEvents.checkForOver()) {
+    store.game.over = true;
     onGameOver();
   }
   turn = !turn;
