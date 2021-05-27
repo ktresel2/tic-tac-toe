@@ -38,7 +38,7 @@ const onMoveSuccess = function (res) {
     $('h2').text('')
   } else {
     $('h1').text('Have fun!')
-    $('h2').text(`It's ${turn ? 'O' : 'X'}'s turn`)
+    $('h2').text(`It's ${turn ? 'X' : 'O'}'s turn`)
     $('.box').each(function (index) {
       $(this).text(res.game.cells[index])
     })
@@ -48,7 +48,6 @@ const onMoveSuccess = function (res) {
     store.game.over = true
     onGameOver()
   }
-  turn = !turn
   return turn
 }
 
@@ -74,6 +73,7 @@ const play = function (square) {
   } else {
     playO(square)
   }
+  turn = !turn
   store.boxesCounted++
 }
 
