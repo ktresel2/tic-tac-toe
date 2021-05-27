@@ -17018,7 +17018,7 @@ var onMoveSuccess = function onMoveSuccess(res) {
     $('h2').text('');
   } else {
     $('h1').text('Have fun!');
-    $('h2').text('It\'s ' + (turn ? 'O' : 'X') + '\'s turn');
+    $('h2').text('It\'s ' + (turn ? 'X' : 'O') + '\'s turn');
     $('.box').each(function (index) {
       $(this).text(res.game.cells[index]);
     });
@@ -17028,7 +17028,6 @@ var onMoveSuccess = function onMoveSuccess(res) {
     store.game.over = true;
     onGameOver();
   }
-  turn = !turn;
   return turn;
 };
 
@@ -17054,6 +17053,7 @@ var play = function play(square) {
   } else {
     playO(square);
   }
+  turn = !turn;
   store.boxesCounted++;
 };
 
