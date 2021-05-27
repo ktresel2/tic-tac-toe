@@ -37,9 +37,7 @@ const playMove = function (e) {
     }
   }
   api.updateGame(data).then(ui.onMoveSuccess).catch(ui.onMoveFailure)
-  if (store.game.over) {
-    ui.onGameOver()
-  } else {
+  if (!store.game.over) {
     turn = !turn
   }
 }
