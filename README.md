@@ -23,19 +23,8 @@ As a player, I want to be able to start a new game as soon as the last one is fi
 
 
 
-App flow:
-
-Upon landing, the user will be prompted to either sign in with an existing account or create a new one with a username, password, and password confirmation.
-
-If a new account is created successfully, the new user will then be able to sign in.
-
-Once signed in, the user may click the green button to start a new game, the red button to sign out, or the yellow button to change their password.
-
-Once the game is started, the user may make their first move as X, then the second move as Y, and so on in alternating pattern until the game has ended in a tie or with a winner.
-
-The game has built in logic to determine wins and ties and display appropriate messaging in the header upon any game ending event.
-
-After the game is over, the user may click the green button to immediately start a new game. All previous data is stored and a new game is begun.
+Description:
+This application is a Tic Tac Toe game that requires the user to log in to play. Once signed in, the user will begin playing as X and then rotate back and forth between X and O. The game will stop when a win has been achieved and will register a tie if the game finishes with neither X or O achieving any win condition. The user may change their password and log out while signed in.
 
 
 
